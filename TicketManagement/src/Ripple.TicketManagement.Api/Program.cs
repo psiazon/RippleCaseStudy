@@ -20,7 +20,19 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Purch
 builder.Services.AddValidatorsFromAssemblyContaining<PurchaseTicketsValidator>();
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 builder.Services.AddRateLimiter(options => options.AddFixedWindowLimiter("fixed", limiter => { limiter.PermitLimit = 100; limiter.Window = TimeSpan.FromMinutes(1); limiter.QueueLimit = 0; }));
-builder.Services.AddCors(options => options.AddPolicy("TrustedClients", policy => policy.WithOrigins(builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>()).AllowAnyHeader().AllowAnyMethod()));
+//builder.Services.AddCors(options => options.AddPolicy("TrustedClients", policy => policy.WithOrigins(builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>()).AllowAnyHeader().AllowAnyMethod()));
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:7001", "https://localhost:7001")
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
+});
+
 builder.Services.Configure<FormOptions>(o => o.MultipartBodyLengthLimit = 5_242_880);
 builder.WebHost.ConfigureKestrel(o => o.Limits.MaxRequestBodySize = 5_242_880);
 var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SigningKey"]!);
@@ -61,7 +73,8 @@ app.UseSwaggerUI(options =>
 
 app.MapControllers();
 app.UseHttpsRedirection();
-app.UseCors("TrustedClients");
+//app.UseCors("TrustedClients");
+app.UseCors("AllowFrontend");
 app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();

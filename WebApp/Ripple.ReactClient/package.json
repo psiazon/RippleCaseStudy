@@ -1,0 +1,19 @@
+{
+  "name": "ripple-ticketing-react-client",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host localhost --port 7001",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host localhost --port 7001"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "typescript": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {}
+}
