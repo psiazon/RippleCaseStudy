@@ -1,0 +1,82 @@
+I am currently working on a case study sent by Ripple, a company that I applied for Senior Software Back-end Engineer.
+Create a solution with possible mutiple projects to implement this case study. Explain each technology used, why you choose it.
+Create all the necessary classes in the solution folders or namespaces:
+
+  - Ripple.Ticketing.Api
+  - Ripple.Ticketing.Application
+  - Ripple.Ticketing.Domain
+  - Ripple.Ticketing.Infrastructure
+  - Testfiles
+
+Create a separate API project for Ticket Management and Event Management for easier deployment.
+Use SQL Server Express that is installed on the local machine. Connect to the localhost to create the database and the tables and all database objects needed.
+All the files generated should have proper line feed formatting.
+
+Implement the following features:
+ a) Rate limiting feature
+ b) Authentication using JWT / OAuth2
+ c) Authorization by role or policy
+ d) Input validation
+ e) Prevent SQL injection
+ f) CORS restriction
+ g) Hide sensitive error details
+ h) Use centralized logging and monitoring
+ i) Limit request body size
+ j) Make use of MapOpenApi() to generate OpenAPI document.
+ k) Do not use mininmal API, use standard routing on the controller
+ l) Use Xunit for unit tests.
+
+ 
+For the output, create a zip file that contains the working solution with all the miscellanous files like the README and OpenAPI yaml files.
+Here is the details of the case study:
+
+Overview
+In this challenge, you’ll build a REST API for a simplified event ticketing system.
+Requirements: 
+A) Core Functionality
+Create a RESTful API that supports the following features:
+1. Event Management
+a. Create, retrieve, update, and delete events
+b. Each event should have a name, description, venue, date, time, total ticket capacity, and
+pricing tiers
+
+2. Ticket Management
+a. Purchase tickets for an event
+b. View ticket availability
+c. Handle ticket inventory and prevent overselling
+
+3. Basic Reporting
+a. Generate a summary of ticket sales by event
+
+B) Technical Requirements
+• Implement the solution in C#.
+• Use any framework, plugins, and 3rd party components that you’re comfortable with
+• Use a database of your choice (relational or NoSQL)
+• Include proper error handling and validation
+• Write meaningful tests (unit and/or integration)
+• Include a README with setup instructions
+
+C) AI Tooling Guidelines
+• Use of AI tools is permitted (e.g. CoPilot), we ourselves have been adopting them to improve
+developer productivity
+• If used, plan to share how you used AI to help you accelerate the outcomes
+• We’re generally more interested in understanding the choices you’ve made, tradeoffs considered,
+thoughts on further operationalizing, and overall thought process on the approach
+
+D) Evaluation Criteria
+Your solution will be evaluated based on:
+1. Code Quality
+a. Clean, readable, and well-structured code
+b. Proper error handling and edge cases
+c. Appropriate use of design patterns
+2. System Design
+a. API design and RESTfulness
+b. Data model design
+c. Scalability considerations
+3. Testing
+a. Test coverage and quality
+b. Edge case handling
+4. Documentation
+a. Setup instructions
+b. Design decisions and trade-offs explained
+
