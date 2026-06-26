@@ -7,6 +7,7 @@ using Ripple.EventManagement.Domain.Entities;
 namespace Ripple.EventManagement.Application.Events;
 
 using System.Text.Json.Serialization;
+using System.Threading.Tasks.Sources;
 
 public sealed class UpdateEventCommand : IRequest<bool>
 {
@@ -62,7 +63,9 @@ public sealed class UpdateEventHandler(IEventDbContext db) : IRequestHandler<Upd
         var evt = await db.Events.Include(x => x.PricingTiers).SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
         if (evt is null) return false;
         evt.Update(request.Name, request.Description, request.Venue, request.EventDate, request.EventTime, request.TotalTicketCapacity, request.PricingTiers.Select(x => new PricingTier(x.Name, x.Price)));
+        //evt.PricingTiers.Clear();
         await db.SaveChangesAsync(cancellationToken);
+
         return true;
     }
 }
