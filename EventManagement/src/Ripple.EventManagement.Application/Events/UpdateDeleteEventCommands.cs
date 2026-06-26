@@ -6,31 +6,40 @@ using Ripple.EventManagement.Domain.Entities;
 
 namespace Ripple.EventManagement.Application.Events;
 
-public sealed record UpdateEventCommand(
-    Guid Id,
-    string Name,
-    string Description,
-    string Venue,
-    DateTimeOffset EventDate,
-    TimeOnly EventTime,
-    int TotalTicketCapacity,
-    IReadOnlyCollection<PricingTierRequest> PricingTiers
-) : IRequest<bool>
+using System.Text.Json.Serialization;
+using System.Threading.Tasks.Sources;
+
+public sealed class UpdateEventCommand : IRequest<bool>
 {
+    [JsonConstructor]
     public UpdateEventCommand(
         Guid id,
-        string v1,
-        string v2,
-        string v3,
-        DateTime utcNow,
-        TimeOnly timeOnly,
-        int v4,
-        PricingTierDto[] pricingTierDtos
-    )
-        : this(id, v1, v2, v3, utcNow, timeOnly, v4, pricingTierDtos.Select(dto => new PricingTierRequest(dto.Name, dto.Price)).ToArray())
+        string name,
+        string description,
+        string venue,
+        DateTimeOffset eventDate,
+        TimeOnly eventTime,
+        int totalTicketCapacity,
+        PricingTierRequest[] pricingTiers)
     {
-        // Additional initialization if needed
+        Id = id;
+        Name = name;
+        Description = description;
+        Venue = venue;
+        EventDate = eventDate;
+        EventTime = eventTime;
+        TotalTicketCapacity = totalTicketCapacity;
+        PricingTiers = pricingTiers;
     }
+
+    public Guid Id { get; }
+    public string Name { get; }
+    public string Description { get; }
+    public string Venue { get; }
+    public DateTimeOffset EventDate { get; }
+    public TimeOnly EventTime { get; }
+    public int TotalTicketCapacity { get; }
+    public PricingTierRequest[] PricingTiers { get; }
 }
 
 public sealed record DeleteEventCommand(Guid Id) : IRequest<bool>;
@@ -54,7 +63,9 @@ public sealed class UpdateEventHandler(IEventDbContext db) : IRequestHandler<Upd
         var evt = await db.Events.Include(x => x.PricingTiers).SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
         if (evt is null) return false;
         evt.Update(request.Name, request.Description, request.Venue, request.EventDate, request.EventTime, request.TotalTicketCapacity, request.PricingTiers.Select(x => new PricingTier(x.Name, x.Price)));
+        //evt.PricingTiers.Clear();
         await db.SaveChangesAsync(cancellationToken);
+
         return true;
     }
 }
