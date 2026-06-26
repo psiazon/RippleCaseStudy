@@ -1,0 +1,14 @@
+openapi: 3.0.1
+info:
+  title: Ripple Ticket Management API
+  version: v1
+paths:
+  /api/tickets/purchase:
+    post:
+      summary: Purchase tickets
+  /api/tickets/availability/{eventId}:
+    get:
+      summary: View ticket availability
+  /api/tickets/reports/sales/{eventId}:
+    get:
+      summary: Sales summary by event

@@ -1,0 +1,155 @@
+{
+  "info": {
+    "_postman_id": "9fb412f8-92f5-4f4e-bebe-c8377138eb69",
+    "name": "Ripple Ticket Management",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56150919"
+  },
+  "item": [
+    {
+      "name": "Purchase a ticket",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWxpY2UiLCJzdWIiOiJhbGljZSIsImp0aSI6IjFkYzc3OTYwLWU0ZmItNDYzNC05YWRiLTFhMjc3NjQwOGRkMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzgyNDI3NDU5LCJleHAiOjE3ODYwMjc0NTksImlzcyI6IlJpcHBsZVRpY2tldGluZyIsImF1ZCI6IlJpcHBsZVRpY2tldGluZ0NsaWVudHMifQ.UpJPYHuEF0HszQjJmnET-tFNQBxET5iHOX1KQiDtSMc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"eventId\": \"74E39632-93F9-4275-A0F8-A5525ABC5B9F\",\r\n  \"pricingTierId\": \"6BD939E8-C190-43FE-81C3-51C354FF3C17\",\r\n  \"purchaserEmail\": \"customer@example.com\",\r\n  \"quantity\": 20\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://localhost:6001/api/tickets/purchase",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "6001",
+          "path": [
+            "api",
+            "tickets",
+            "purchase"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add new inventory",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWxpY2UiLCJzdWIiOiJhbGljZSIsImp0aSI6ImRmY2ViNmUyLWFmNmQtNDhjMS1hNTkxLTY0OWJlN2U3ZTlmYiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkV2ZW50TWFuYWdlciIsIm5iZiI6MTc4MjQ0MzI0NiwiZXhwIjoxNzg2MDQzMjQ2LCJpc3MiOiJSaXBwbGVUaWNrZXRpbmciLCJhdWQiOiJSaXBwbGVUaWNrZXRpbmdDbGllbnRzIn0.hmjEinqFErlYZrmTSFI_1w8Y3DS7TXSz0csof5x6oP4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"eventId\": \"550e8400-e29b-41d4-a716-446655440000\",\r\n  \"totalCapacity\": 1000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://localhost:6001/api/tickets/inventories",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "6001",
+          "path": [
+            "api",
+            "tickets",
+            "inventories"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Availability",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWxpY2UiLCJzdWIiOiJhbGljZSIsImp0aSI6IjFkYzc3OTYwLWU0ZmItNDYzNC05YWRiLTFhMjc3NjQwOGRkMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzgyNDI3NDU5LCJleHAiOjE3ODYwMjc0NTksImlzcyI6IlJpcHBsZVRpY2tldGluZyIsImF1ZCI6IlJpcHBsZVRpY2tldGluZ0NsaWVudHMifQ.UpJPYHuEF0HszQjJmnET-tFNQBxET5iHOX1KQiDtSMc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:6001/api/tickets/availability/74e39632-93f9-4275-a0f8-a5525abc5b9f",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "6001",
+          "path": [
+            "api",
+            "tickets",
+            "availability",
+            "74e39632-93f9-4275-a0f8-a5525abc5b9f"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Sales Report",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWxpY2UiLCJzdWIiOiJhbGljZSIsImp0aSI6IjJjZDI3ZWI1LWMzNjgtNDAwOS1iYzNlLWMwMjhkOTNmOWJmYyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlRpY2tldEFnZW50IiwibmJmIjoxNzgyNDQ2Njc5LCJleHAiOjE3ODYwNDY2NzksImlzcyI6IlJpcHBsZVRpY2tldGluZyIsImF1ZCI6IlJpcHBsZVRpY2tldGluZ0NsaWVudHMifQ.11anL_Ww4cOmMViYPvJK5EWO2cswZuIjFdbCBqjvJQc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:6001/api/tickets/reports/sales/74e39632-93f9-4275-a0f8-a5525abc5b9f",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "6001",
+          "path": [
+            "api",
+            "tickets",
+            "reports",
+            "sales",
+            "74e39632-93f9-4275-a0f8-a5525abc5b9f"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

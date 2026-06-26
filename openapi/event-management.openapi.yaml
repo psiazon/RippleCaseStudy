@@ -1,0 +1,17 @@
+openapi: 3.0.1
+info:
+  title: Ripple Event Management API
+  version: v1
+paths:
+  /api/events:
+    get:
+      summary: List events
+    post:
+      summary: Create event
+  /api/events/{id}:
+    get:
+      summary: Get event by id
+    put:
+      summary: Update event
+    delete:
+      summary: Delete event

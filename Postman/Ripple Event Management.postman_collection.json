@@ -1,0 +1,199 @@
+{
+  "info": {
+    "_postman_id": "3155deac-924a-49aa-9b64-3307f05e53ff",
+    "name": "Ripple Event Management",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56150919"
+  },
+  "item": [
+    {
+      "name": "Get all events",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWxpY2UiLCJzdWIiOiJhbGljZSIsImp0aSI6ImFkN2EwY2VkLTNmZGEtNDU4Mi1hYjVjLWE5YzY3MmNjMDZmNCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkV2ZW50TWFuYWdlciIsIm5iZiI6MTc4MjM5OTc5NCwiZXhwIjoxNzg1OTk5Nzk0LCJpc3MiOiJSaXBwbGVUaWNrZXRpbmciLCJhdWQiOiJSaXBwbGVUaWNrZXRpbmdDbGllbnRzIn0.lZmQ004guiV9NuX0JzRIPIHDbDpuKbvMduTYuKq8g0E",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Client-Id",
+            "value": "12345",
+            "type": "default"
+          }
+        ],
+        "url": {
+          "raw": "https://localhost:5001/api/events",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "api",
+            "events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get event by Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWxpY2UiLCJzdWIiOiJhbGljZSIsImp0aSI6ImFkN2EwY2VkLTNmZGEtNDU4Mi1hYjVjLWE5YzY3MmNjMDZmNCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkV2ZW50TWFuYWdlciIsIm5iZiI6MTc4MjM5OTc5NCwiZXhwIjoxNzg1OTk5Nzk0LCJpc3MiOiJSaXBwbGVUaWNrZXRpbmciLCJhdWQiOiJSaXBwbGVUaWNrZXRpbmdDbGllbnRzIn0.lZmQ004guiV9NuX0JzRIPIHDbDpuKbvMduTYuKq8g0E",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Client-Id",
+            "value": "12345",
+            "type": "default"
+          }
+        ],
+        "url": {
+          "raw": "https://localhost:5001/api/events/4F82465D-2492-4339-8946-27FF51625EFC",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "api",
+            "events",
+            "4F82465D-2492-4339-8946-27FF51625EFC"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create a new event",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWxpY2UiLCJzdWIiOiJhbGljZSIsImp0aSI6ImFkN2EwY2VkLTNmZGEtNDU4Mi1hYjVjLWE5YzY3MmNjMDZmNCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkV2ZW50TWFuYWdlciIsIm5iZiI6MTc4MjM5OTc5NCwiZXhwIjoxNzg1OTk5Nzk0LCJpc3MiOiJSaXBwbGVUaWNrZXRpbmciLCJhdWQiOiJSaXBwbGVUaWNrZXRpbmdDbGllbnRzIn0.lZmQ004guiV9NuX0JzRIPIHDbDpuKbvMduTYuKq8g0E",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Client-Id",
+            "value": "12345",
+            "type": "default"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Summer Music Festival 2026\",\r\n  \"description\": \"A three-day outdoor music festival featuring rock, pop, and indie bands. Family-friendly atmosphere with food vendors and camping available.\",\r\n  \"venue\": \"Riverside Park Amphitheater, Denver, CO\",\r\n  \"eventDate\": \"2026-07-15\",\r\n  \"eventTime\": \"18:00:00\",\r\n  \"totalTicketCapacity\": 100000,\r\n  \"pricingTiers\": [\r\n    {\r\n      \"name\": \"General Admission\",\r\n      \"price\": 75.00\r\n    },\r\n    {\r\n      \"name\": \"VIP\",\r\n      \"price\": 150.00\r\n    },\r\n    {\r\n      \"name\": \"Premium VIP\",\r\n      \"price\": 250.00\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://localhost:5001/api/events",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "api",
+            "events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update an event",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWxpY2UiLCJzdWIiOiJhbGljZSIsImp0aSI6ImFkN2EwY2VkLTNmZGEtNDU4Mi1hYjVjLWE5YzY3MmNjMDZmNCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkV2ZW50TWFuYWdlciIsIm5iZiI6MTc4MjM5OTc5NCwiZXhwIjoxNzg1OTk5Nzk0LCJpc3MiOiJSaXBwbGVUaWNrZXRpbmciLCJhdWQiOiJSaXBwbGVUaWNrZXRpbmdDbGllbnRzIn0.lZmQ004guiV9NuX0JzRIPIHDbDpuKbvMduTYuKq8g0E",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": \"cde69b3f-5007-41ee-9263-774a2e7a4d47\",\r\n    \"name\": \"Ripple Test Event\",\r\n    \"description\": \"A three-day outdoor music festival featuring rock, pop, and indie bands. Family-friendly atmosphere with food vendors and camping available.\",\r\n    \"venue\": \"Riverside Park Amphitheater, Denver, CO\",\r\n    \"eventDate\": \"2026-07-15T00:00:00-05:00\",\r\n    \"eventTime\": \"18:00:00\",\r\n    \"totalTicketCapacity\": 100000,\r\n    \"pricingTiers\": [\r\n        {\r\n            \"id\": \"10946fd4-3184-4281-984b-778aa84c883d\",\r\n            \"name\": \"VIP\",\r\n            \"price\": 150.00\r\n        },\r\n        {\r\n            \"id\": \"1bae589b-3a44-4580-af64-77f21dbd8cfd\",\r\n            \"name\": \"Premium VIP\",\r\n            \"price\": 250.00\r\n        },\r\n        {\r\n            \"id\": \"8702c0ff-7ac1-4a8d-b414-b084b4b6fd56\",\r\n            \"name\": \"General Admission\",\r\n            \"price\": 75.00\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://localhost:5001/api/events/4461e65e-d6fc-49e9-9b30-d2143c26967b",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "api",
+            "events",
+            "4461e65e-d6fc-49e9-9b30-d2143c26967b"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete an event",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWxpY2UiLCJzdWIiOiJhbGljZSIsImp0aSI6ImFkN2EwY2VkLTNmZGEtNDU4Mi1hYjVjLWE5YzY3MmNjMDZmNCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkV2ZW50TWFuYWdlciIsIm5iZiI6MTc4MjM5OTc5NCwiZXhwIjoxNzg1OTk5Nzk0LCJpc3MiOiJSaXBwbGVUaWNrZXRpbmciLCJhdWQiOiJSaXBwbGVUaWNrZXRpbmdDbGllbnRzIn0.lZmQ004guiV9NuX0JzRIPIHDbDpuKbvMduTYuKq8g0E",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:5001/api/events/4461e65e-d6fc-49e9-9b30-d2143c26967b",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "api",
+            "events",
+            "4461e65e-d6fc-49e9-9b30-d2143c26967b"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
