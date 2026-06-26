@@ -42,9 +42,23 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("CanBuyTickets", policy => policy.RequireRole("Admin", "TicketAgent", "Customer"));
     options.AddPolicy("CanViewReports", policy => policy.RequireRole("Admin", "EventManager", "TicketAgent"));
 });
+
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
 var app = builder.Build();
 app.UseSerilogRequestLogging();
 app.MapOpenApi();
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/openapi/v1.json", "Event API v1");
+});
+
+
 app.MapControllers();
 app.UseHttpsRedirection();
 app.UseCors("TrustedClients");

@@ -52,9 +52,19 @@ builder.Services.AddHttpClient("TicketInventory", client =>
     // configure timeouts/headers as needed
 });
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 app.UseSerilogRequestLogging();
 app.MapOpenApi();
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/openapi/v1.json", "Event API v1");
+});
+
 app.MapControllers();
 app.UseHttpsRedirection();
 app.UseCors("TrustedClients");
