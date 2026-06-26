@@ -2,8 +2,11 @@ using FluentAssertions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using Moq.Protected;
 using Ripple.EventManagement.Api.Controllers;
 using Ripple.EventManagement.Application.Events;
+using System.Net;
+using System.Text;
 using Xunit;
 
 namespace Ripple.EventManagement.Api.Tests;
@@ -16,7 +19,39 @@ public sealed class EventsControllerTests
         var events = new List<EventDto> { SampleEventDto() };
         var sender = new Mock<ISender>();
         sender.Setup(s => s.Send(It.IsAny<GetEventsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(events);
-        var controller = new EventsController(sender.Object);
+
+        // Mock HttpMessageHandler
+        var handler = new Mock<HttpMessageHandler>();
+
+        handler.Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(
+                    "{}",                // return whatever your controller expects
+                    Encoding.UTF8,
+                    "application/json")
+            });
+
+        var httpClient = new HttpClient(handler.Object)
+        {
+            BaseAddress = new Uri("https://localhost")
+        };
+
+        // Mock IHttpClientFactory
+        var httpClientFactory = new Mock<IHttpClientFactory>();
+
+        httpClientFactory
+            .Setup(f => f.CreateClient(It.IsAny<string>()))
+            .Returns(httpClient);
+
+        var controller = new EventsController(
+            sender.Object,
+            httpClientFactory.Object);
 
         var result = await controller.Get(CancellationToken.None);
 
@@ -31,7 +66,38 @@ public sealed class EventsControllerTests
         var dto = SampleEventDto();
         var sender = new Mock<ISender>();
         sender.Setup(s => s.Send(It.Is<GetEventByIdQuery>(q => q.Id == dto.Id), It.IsAny<CancellationToken>())).ReturnsAsync(dto);
-        var controller = new EventsController(sender.Object);
+        // Mock HttpMessageHandler
+        var handler = new Mock<HttpMessageHandler>();
+
+        handler.Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(
+                    "{}",                // return whatever your controller expects
+                    Encoding.UTF8,
+                    "application/json")
+            });
+
+        var httpClient = new HttpClient(handler.Object)
+        {
+            BaseAddress = new Uri("https://localhost")
+        };
+
+        // Mock IHttpClientFactory
+        var httpClientFactory = new Mock<IHttpClientFactory>();
+
+        httpClientFactory
+            .Setup(f => f.CreateClient(It.IsAny<string>()))
+            .Returns(httpClient);
+
+        var controller = new EventsController(
+            sender.Object,
+            httpClientFactory.Object);
 
         var result = await controller.GetById(dto.Id, CancellationToken.None);
 
@@ -43,7 +109,38 @@ public sealed class EventsControllerTests
     {
         var sender = new Mock<ISender>();
         sender.Setup(s => s.Send(It.IsAny<GetEventByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((EventDto?)null);
-        var controller = new EventsController(sender.Object);
+        // Mock HttpMessageHandler
+        var handler = new Mock<HttpMessageHandler>();
+
+        handler.Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(
+                    "{}",                // return whatever your controller expects
+                    Encoding.UTF8,
+                    "application/json")
+            });
+
+        var httpClient = new HttpClient(handler.Object)
+        {
+            BaseAddress = new Uri("https://localhost")
+        };
+
+        // Mock IHttpClientFactory
+        var httpClientFactory = new Mock<IHttpClientFactory>();
+
+        httpClientFactory
+            .Setup(f => f.CreateClient(It.IsAny<string>()))
+            .Returns(httpClient);
+
+        var controller = new EventsController(
+            sender.Object,
+            httpClientFactory.Object);
 
         var result = await controller.GetById(Guid.NewGuid(), CancellationToken.None);
 
@@ -57,7 +154,38 @@ public sealed class EventsControllerTests
         var created = SampleEventDto();
         var sender = new Mock<ISender>();
         sender.Setup(s => s.Send(command, It.IsAny<CancellationToken>())).ReturnsAsync(created);
-        var controller = new EventsController(sender.Object);
+        // Mock HttpMessageHandler
+        var handler = new Mock<HttpMessageHandler>();
+
+        handler.Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(
+                    "{}",                // return whatever your controller expects
+                    Encoding.UTF8,
+                    "application/json")
+            });
+
+        var httpClient = new HttpClient(handler.Object)
+        {
+            BaseAddress = new Uri("https://localhost")
+        };
+
+        // Mock IHttpClientFactory
+        var httpClientFactory = new Mock<IHttpClientFactory>();
+
+        httpClientFactory
+            .Setup(f => f.CreateClient(It.IsAny<string>()))
+            .Returns(httpClient);
+
+        var controller = new EventsController(
+            sender.Object,
+            httpClientFactory.Object);
 
         var result = await controller.Create(command, CancellationToken.None);
 
@@ -74,7 +202,38 @@ public sealed class EventsControllerTests
         var command = SampleUpdateCommand(Guid.NewGuid());
         var sender = new Mock<ISender>();
         sender.Setup(s => s.Send(It.Is<UpdateEventCommand>(c => c.Id == routeId), It.IsAny<CancellationToken>())).ReturnsAsync(true);
-        var controller = new EventsController(sender.Object);
+        // Mock HttpMessageHandler
+        var handler = new Mock<HttpMessageHandler>();
+
+        handler.Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(
+                    "{}",                // return whatever your controller expects
+                    Encoding.UTF8,
+                    "application/json")
+            });
+
+        var httpClient = new HttpClient(handler.Object)
+        {
+            BaseAddress = new Uri("https://localhost")
+        };
+
+        // Mock IHttpClientFactory
+        var httpClientFactory = new Mock<IHttpClientFactory>();
+
+        httpClientFactory
+            .Setup(f => f.CreateClient(It.IsAny<string>()))
+            .Returns(httpClient);
+
+        var controller = new EventsController(
+            sender.Object,
+            httpClientFactory.Object);
 
         var result = await controller.Update(routeId, command, CancellationToken.None);
 
@@ -86,7 +245,38 @@ public sealed class EventsControllerTests
     {
         var sender = new Mock<ISender>();
         sender.Setup(s => s.Send(It.IsAny<UpdateEventCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(false);
-        var controller = new EventsController(sender.Object);
+        // Mock HttpMessageHandler
+        var handler = new Mock<HttpMessageHandler>();
+
+        handler.Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(
+                    "{}",                // return whatever your controller expects
+                    Encoding.UTF8,
+                    "application/json")
+            });
+
+        var httpClient = new HttpClient(handler.Object)
+        {
+            BaseAddress = new Uri("https://localhost")
+        };
+
+        // Mock IHttpClientFactory
+        var httpClientFactory = new Mock<IHttpClientFactory>();
+
+        httpClientFactory
+            .Setup(f => f.CreateClient(It.IsAny<string>()))
+            .Returns(httpClient);
+
+        var controller = new EventsController(
+            sender.Object,
+            httpClientFactory.Object);
 
         var result = await controller.Update(Guid.NewGuid(), SampleUpdateCommand(Guid.NewGuid()), CancellationToken.None);
 
@@ -99,7 +289,38 @@ public sealed class EventsControllerTests
         var id = Guid.NewGuid();
         var sender = new Mock<ISender>();
         sender.Setup(s => s.Send(It.Is<DeleteEventCommand>(c => c.Id == id), It.IsAny<CancellationToken>())).ReturnsAsync(true);
-        var controller = new EventsController(sender.Object);
+        // Mock HttpMessageHandler
+        var handler = new Mock<HttpMessageHandler>();
+
+        handler.Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(
+                    "{}",                // return whatever your controller expects
+                    Encoding.UTF8,
+                    "application/json")
+            });
+
+        var httpClient = new HttpClient(handler.Object)
+        {
+            BaseAddress = new Uri("https://localhost")
+        };
+
+        // Mock IHttpClientFactory
+        var httpClientFactory = new Mock<IHttpClientFactory>();
+
+        httpClientFactory
+            .Setup(f => f.CreateClient(It.IsAny<string>()))
+            .Returns(httpClient);
+
+        var controller = new EventsController(
+            sender.Object,
+            httpClientFactory.Object);
 
         var result = await controller.Delete(id, CancellationToken.None);
 
@@ -111,7 +332,38 @@ public sealed class EventsControllerTests
     {
         var sender = new Mock<ISender>();
         sender.Setup(s => s.Send(It.IsAny<DeleteEventCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(false);
-        var controller = new EventsController(sender.Object);
+        // Mock HttpMessageHandler
+        var handler = new Mock<HttpMessageHandler>();
+
+        handler.Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(
+                    "{}",                // return whatever your controller expects
+                    Encoding.UTF8,
+                    "application/json")
+            });
+
+        var httpClient = new HttpClient(handler.Object)
+        {
+            BaseAddress = new Uri("https://localhost")
+        };
+
+        // Mock IHttpClientFactory
+        var httpClientFactory = new Mock<IHttpClientFactory>();
+
+        httpClientFactory
+            .Setup(f => f.CreateClient(It.IsAny<string>()))
+            .Returns(httpClient);
+
+        var controller = new EventsController(
+            sender.Object,
+            httpClientFactory.Object);
 
         var result = await controller.Delete(Guid.NewGuid(), CancellationToken.None);
 
