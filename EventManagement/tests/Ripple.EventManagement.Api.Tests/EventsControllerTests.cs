@@ -374,5 +374,5 @@ public sealed class EventsControllerTests
 
     private static CreateEventCommand SampleCreateCommand() => new("Name", "Description", "Venue", DateTimeOffset.UtcNow.AddDays(1), new TimeOnly(19, 0), 100, [new PricingTierRequest("General", 10)]);
 
-    private static UpdateEventCommand SampleUpdateCommand(Guid id) => new(id, "Name", "Description", "Venue", DateTimeOffset.UtcNow.AddDays(1), new TimeOnly(19, 0), 100, [new PricingTierRequest("General", 10)]);
+    private static UpdateEventCommand SampleUpdateCommand(Guid id) => new(id, "Name", "Description", "Venue", DateTimeOffset.MaxValue, new TimeOnly(19, 0), 100, [new PricingTierRequest("General", 10)]);
 }

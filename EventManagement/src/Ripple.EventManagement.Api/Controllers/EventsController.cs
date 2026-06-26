@@ -71,7 +71,19 @@ namespace Ripple.EventManagement.Api.Controllers
         [Authorize(Policy = "CanManageEvents")]
         public async Task<IActionResult> Update(Guid id, UpdateEventCommand command, CancellationToken cancellationToken)
         {
-            var updated = await _sender.Send(command with { Id = id }, cancellationToken);
+            var updated = await _sender.Send(
+                new UpdateEventCommand(
+                    id,
+                    command.Name,
+                    command.Description,
+                    command.Venue,
+                    command.EventDate,
+                    command.EventTime,
+                    command.TotalTicketCapacity,
+                    command.PricingTiers
+                ),
+                cancellationToken
+            );
             return updated ? NoContent() : NotFound();
         }
 
