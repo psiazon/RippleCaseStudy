@@ -3,8 +3,7 @@ namespace Ripple.EventManagement.Domain.Entities;
 public sealed class Event
 {
     private readonly List<PricingTier> _pricingTiers = new();
-    private List<PricingTier> pricingTiers;
-
+    
     private Event() { }
 
     public Event(string name, string description, string venue, DateTimeOffset eventDate, TimeOnly eventTime, int totalTicketCapacity, List<PricingTier> pricingTiers)
@@ -23,7 +22,7 @@ public sealed class Event
     public TimeOnly EventTime { get; private set; }
     public int TotalTicketCapacity { get; private set; }
     public DateTimeOffset CreatedAtUtc { get; private set; }
-    public List<PricingTier> PricingTiers { get => pricingTiers; set => pricingTiers = value; }
+    public List<PricingTier> PricingTiers { get; set; }
     public void Update(string name, string description, string venue, DateTimeOffset eventDate, TimeOnly eventTime, int totalTicketCapacity, IEnumerable<PricingTier> pricingTiers)
     {
         if (totalTicketCapacity <= 0) throw new ArgumentOutOfRangeException(nameof(totalTicketCapacity));
@@ -33,6 +32,7 @@ public sealed class Event
         EventDate = eventDate;
         EventTime = eventTime;
         TotalTicketCapacity = totalTicketCapacity;
+        PricingTiers = pricingTiers.ToList();
         _pricingTiers.Clear();
         _pricingTiers.AddRange(pricingTiers);
     }
