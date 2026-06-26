@@ -1,0 +1,18 @@
+There are 2 web api projects involve: Ticket Micro Service and Event Micro service. Create an process flow diagram that describe each operations step by step.
+
+The Event micro service has 5 operations:
+
+1. Get all events from the SQL Express database.
+2. Get an Event using the Id as the search key. This will search for the Event records from the SQL Express database
+3. Post an Event record. This will create a new Event record in the database.
+  3.1 After creating the Event record, the next step is to call the Ticket Micro service to add Inventory record into the database. 
+4. Update an Event record. This will update the Event record in the database.
+5. Delete an Event record. This will delete the Event record from the database.
+
+The Ticket micro service has 4 operations:
+
+1. Purchase a ticket to an Event. This will call the Event micro service "Get An event" operation and update inventory and sales records.
+
+2. Create a new inventory record. This will create a new inventory record for a given event. This end point is called by the Event micro service after creating an Event record successfuly.
+3. Check for an event ticket availability. This will call the Event micro service "Get An event" operation and check for availability of tickets.
+4. Produce a sales report by a given event id.
